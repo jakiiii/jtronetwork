@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, reverse
-from django.views.generic import FormView, CreateView
+from django.views.generic import FormView, CreateView, TemplateView
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -28,27 +28,30 @@ class NextUrlMixin(object):
         return self.default_next
 
 
-class UserLoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
-    form_class = UserLoginForm
-    template_name = 'accounts/login.html'
+class UserLoginView(TemplateView):
+    template_name = 'front_base.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        if request.user.is_authenticated:
-            return redirect("home:home")
-        return response
-
-    def form_valid(self, form):
-        next_path = self.get_next_url()
-        return redirect(next_path)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserLoginView, self).get_context_data(**kwargs)
-        context['title'] = 'Login'
-        return context
-
-    def get_success_url(self):
-        return reverse('home:home')
+# class UserLoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
+#     form_class = UserLoginForm
+#     template_name = 'accounts/login.html'
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         response = super().dispatch(request, *args, **kwargs)
+#         if request.user.is_authenticated:
+#             return redirect("home:home")
+#         return response
+#
+#     def form_valid(self, form):
+#         next_path = self.get_next_url()
+#         return redirect(next_path)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(UserLoginView, self).get_context_data(**kwargs)
+#         context['title'] = 'Login'
+#         return context
+#
+#     def get_success_url(self):
+#         return reverse('home:home')
 
 
 class UserRegistrationView(SuccessMessageMixin, CreateView):
