@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 ]
 
 LOCALE_APPS = [
-    # 'apps.accounts',
+    'apps.accounts',
 ]
 
 THIRD_PARTY_APPS = [
@@ -66,7 +66,7 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS += LOCALE_APPS + THIRD_PARTY_APPS
 
 # Custom User Auth
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
