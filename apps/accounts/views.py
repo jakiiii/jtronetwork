@@ -29,7 +29,8 @@ class NextUrlMixin(object):
 
 
 class UserLoginView(TemplateView):
-    template_name = 'front_base.html'
+    # template_name = 'base_front.html'
+    template_name = 'accounts/accounts.html'
 
 # class UserLoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
 #     form_class = UserLoginForm
